@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# ----------------------------------------------------------------------------
+#  Hvigor 启动脚本（教学 Demo 版）
+#
+#  与 DevEco Studio 生成的脚本等价，唯一的差别是**优先使用 DevEco Studio 自带的
+#  hvigor**：这样在没做过 `npm install` 的机器上也能直接构建。
+#  找不到自带版本时回落 `npx hvigorw`（与官方脚本行为一致）。
+#
+#  可用环境变量：
+#    DEVECO_SDK_HOME  —— SDK 路径（未设置时尝试常见安装位置）
+#    NODE_HOME        —— Node 目录（未设置时用 PATH 里的 node）
+# ----------------------------------------------------------------------------
+
+HVIGOR_APP_HOME="$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")"
+
+warn() { echo -e "\033[1;33m[$(date '+%Y-%m-%d %H:%M:%S')]$@\033[0m"; }
+error() { echo -e "\033[1;31m[$(date '+%Y-%m-%d %H:%M:%S')]$@\033[0m"; }
+fail() { error "$@"; exit 1; }
+
+# --- 选择 node ---
+if [ -n "${NODE_HOME}" ]; then
+  if [ -x "${NODE_HOME}/bin/node" ]; then EXECUTABLE_NODE="${NODE_HOME}/bin/node"
+  elif [ -x "${NODE_HOME}/node.exe" ]; then EXECUTABLE_NODE="${NODE_HOME}/node.exe"
+  else fail "ERROR: NODE_HOME 指向的目录无效：$NODE_HOME"; fi
+else
+  EXECUTABLE_NODE="node"
+  command -v node >/dev/null 2>&1 || fail "ERROR: 未设置 NODE_HOME，且 PATH 里找不到 node"
+fi
+
+# --- 优先使用 DevEco Studio 自带的 hvigor ---
+DEVECO_CANDIDATES="
+/Applications/DevEco-Studio.app/Contents/tools/hvigor/bin/hvigorw
+$HOME/Applications/DevEco-Studio.app/Contents/tools/hvigor/bin/hvigorw
+/opt/deveco-studio/tools/hvigor/bin/hvigorw
+"
+
+for cand in $DEVECO_CANDIDATES; do
+  if [ -x "$cand" ]; then
+    exec "$cand" "$@"
+  fi
+done
+
+# --- 回落：npx hvigorw ---
+warn "未找到 DevEco Studio 自带的 hvigor，回落 npx hvigorw（首次运行会下载依赖）"
+exec npx --yes hvigorw "$@"

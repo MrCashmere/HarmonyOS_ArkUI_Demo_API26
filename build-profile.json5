@@ -1,0 +1,56 @@
+{
+  "app": {
+    // 教学 Demo 刻意**不写 signingConfigs**：请用 DevEco Studio 自动签名
+    //   File → Project Structure → Signing Configs → 勾选 Automatically generate signature
+    // 这样任何人的机器上都能直接跑，不会因为证书路径写死而构建失败。
+    // （细节与踩坑记录见文件末尾的注释）
+    "products": [
+      {
+        "name": "default",
+        // 沉浸光感（uiMaterial / systemMaterial）是 API 26 起的能力：
+        //   compileSdkVersion / targetSdkVersion 都必须是 26.0.0，
+        //   否则 Toggle 承载层上的材质不会渲染。
+        "compileSdkVersion": "26.0.0",
+        "targetSdkVersion": "26.0.0",
+        // 最低兼容到 API 20：低于 26 的机器上自动降级为毛玻璃
+        // （降级路径见 utils/SystemMaterial.ets 与 components/CardSurface.ets）
+        "compatibleSdkVersion": "6.0.0(20)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+    // ⚠️ 这里**故意没有** signingConfigs 段。
+    //    它以前写死过本机证书路径与口令，导致换一台机器就报
+    //      00303074 Configuration Error: The bundleName in app.json5/hvigorfile.ts
+    //      does not match the bundleName in the generated SigningConfigs
+    //    勾选自动签名后，DevEco 会自行把这一段（以及 product 里的
+    //    "signingConfig": "default"）写回来，不用手工填。
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

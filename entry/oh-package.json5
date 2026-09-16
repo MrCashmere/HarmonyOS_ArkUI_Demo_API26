@@ -1,0 +1,10 @@
+{
+  "modelVersion": "6.1.1",
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "UI 教学 Demo 入口模块",
+  "main": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}

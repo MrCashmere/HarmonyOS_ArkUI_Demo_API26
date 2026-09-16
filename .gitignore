@@ -1,0 +1,34 @@
+# ---- HarmonyOS / DevEco Studio ----
+/build
+/entry/build
+**/build/
+/oh_modules
+**/oh_modules/
+/.hvigor
+/.hvigor-home
+/.cxx
+/.preview
+**/.preview/
+/.idea
+*.iml
+local.properties
+.clangd
+.clang-format
+oh-package-lock.json5
+
+# ---- 构建产物 ----
+*.hap
+*.hsp
+*.har
+*.app
+*.tgz
+
+# ---- 参考工程 CLink ----
+# CLink 是 GPL-3.0 第三方工程，刻意不入库；它是**本仓库的兄弟目录**（不在仓库内），
+# 所以下面只是防止有人把它 clone 进来后被误提交。
+# 需要对照阅读时：git clone https://github.com/MrCashmere/CLink ../CLink
+/CLink/
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db

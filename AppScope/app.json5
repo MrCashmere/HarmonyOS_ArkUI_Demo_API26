@@ -1,0 +1,14 @@
+{
+  "app": {
+    // 应用标识（改名后是一个**新的应用**，需要重新安装）
+    "bundleName": "com.cashmere.appthemedemo",
+    "vendor": "cashmere",
+    "versionCode": 1000000,
+    "versionName": "1.0.0",
+    "icon": "$media:app_icon",
+    // 应用名走资源本地化：
+    //   base/   → CashmereAppThemeDemo（英文与其它语言的回退值）
+    //   zh_CN/  → 羊绒应用主题样板
+    "label": "$string:app_name"
+  }
+}

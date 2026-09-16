@@ -1,0 +1,46 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "EntryAbility",
+    "deviceTypes": ["phone", "tablet", "2in1"],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    // 应用级沉浸式系统材质开关（API 26.0.0 起生效，仅 entry 模块有效）。
+    //
+    // 三个取值：
+    //   default —— 普通组件可主动设置材质；
+    //   enable  —— 更多系统组件自动使用材质，普通组件仍可主动设置；
+    //   disable —— **关闭整个应用的沉浸材质，主动设置的材质也一并失效**。
+    //
+    // ⚠️ enable 模式下，systemMaterial 的样式优先级**高于**组件自身的
+    //    背景色、模糊、阴影与边框——所以材质生效时卡片必须让出这些属性
+    //    （见 SystemMaterial 里的 cardGlassEffect / cardGlassBorderColor / cardGlassShadow）。
+    "metadata": [
+      {
+        "name": "ohos.arkui.UIMaterial.state",
+        "value": "enable"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "description": "$string:ability_desc",
+        "icon": "$media:app_icon",
+        "label": "$string:app_name",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": ["entity.system.home"],
+            "actions": ["action.system.home"]
+          }
+        ]
+      }
+    ]
+  }
+}

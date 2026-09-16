@@ -1,0 +1,10 @@
+{
+  "modelVersion": "6.1.1",
+  "name": "harmonyos-arkui-demo-api26",
+  "version": "1.0.0",
+  "description": "HarmonyOS ArkUI Demo (API 26)：主题色 / 深色模式 / 沉浸光感 教学样板",
+  "main": "",
+  "author": "MrCashmere",
+  "license": "MIT",
+  "dependencies": {}
+}

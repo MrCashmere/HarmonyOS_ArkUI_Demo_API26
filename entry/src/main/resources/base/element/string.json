@@ -1,0 +1,7 @@
+{
+  "string": [
+    { "name": "module_desc", "value": "CashmereAppThemeDemo · HarmonyOS UI 教学样板" },
+    { "name": "ability_desc", "value": "主题色 / 深色模式 / 沉浸光感 教学示例" },
+    { "name": "app_name", "value": "CashmereAppThemeDemo" }
+  ]
+}

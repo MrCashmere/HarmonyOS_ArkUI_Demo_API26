@@ -1,0 +1,28 @@
+# 统一换行符：仓库内与工作区一律使用 LF。
+# 不设置的话，Windows 下 git 会警告「LF will be replaced by CRLF」，
+# 导致不同机器 clone 出来的文件内容不一致（diff 噪音、脚本在 Linux/CI 上可能出错）。
+* text=auto eol=lf
+
+# 明确声明为二进制，避免被当作文本改写换行
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.so binary
+*.dll binary
+*.hap binary
+*.hsp binary
+*.har binary
+*.app binary
+*.p12 binary
+*.cer binary
+*.p7b binary
+
+# 行尾敏感的脚本保持原生，不做任何转换
+*.bat text eol=crlf
+*.cmd text eol=crlf
+hvigorw text eol=lf
